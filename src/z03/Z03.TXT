@@ -1,0 +1,33 @@
+
+このＺ８０は「ＭＡＭＥ１０６ｓ」から抜いてきたＺ８０と、
+もともとあった奴（つまり「ｇｅｎｅｓｉｓ＿ｐｌｕｓ」の奴）
+を融合して、改造したものです。
+ちなみに「ＭＡＭＥ１０６ｓ」のリリースは２００６年の５月？？日です。
+
+ *   Portable Z80 emulator V3.5(3.6) (from MAME106s)
+ *   Portable Z80 emulator V2.8(3.2) (from genesis-plus)
+ *   Copyright (C) 1998-2000 Juergen Buchmueller.@MAME
+
+ちなみに「ix/iyのBIT命令」が「エンバグ」してたよ。
+＜誤＞
+OP(xycb,70) { xycb_66();			} /* BIT  6,(XY+o)    */
+OP(xycb,71) { xycb_66();			} /* BIT  6,(XY+o)    */
+OP(xycb,72) { xycb_66();			} /* BIT  6,(XY+o)    */
+OP(xycb,73) { xycb_66();			} /* BIT  6,(XY+o)    */
+OP(xycb,74) { xycb_66();			} /* BIT  6,(XY+o)    */
+OP(xycb,75) { xycb_66();			} /* BIT  6,(XY+o)    */
+OP(xycb,76) { BIT_XY(6,RM(EA));		} /* BIT  6,(XY+o)    */
+OP(xycb,77) { xycb_66();			} /* BIT  6,(XY+o)    */
+
+＜正＞
+OP(xycb,70) { xycb_76();			} /* BIT  6,(XY+o)    */
+OP(xycb,71) { xycb_76();			} /* BIT  6,(XY+o)    */
+OP(xycb,72) { xycb_76();			} /* BIT  6,(XY+o)    */
+OP(xycb,73) { xycb_76();			} /* BIT  6,(XY+o)    */
+OP(xycb,74) { xycb_76();			} /* BIT  6,(XY+o)    */
+OP(xycb,75) { xycb_76();			} /* BIT  6,(XY+o)    */
+OP(xycb,76) { BIT_XY(6,RM(EA)); 	} /* BIT  6,(XY+o)    */
+OP(xycb,77) { xycb_76();			} /* BIT  6,(XY+o)    */
+
+だと思うです。
+
